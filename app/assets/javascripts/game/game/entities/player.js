@@ -1,0 +1,2 @@
+EntityPlayer = ig.Entity.extend({
+});
