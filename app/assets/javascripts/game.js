@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ./impact.min
+//= require bootstrap
+//= require impact.min
 //= require_directory ./game/game/features
 //= require_directory ./game/game/entities
 //= require_directory ./game/game

@@ -2,7 +2,7 @@ EntitySign = Entity_transparent.extend({
 
     weltmeister_anim: 3,
     // The message to be drawn to screen.
-    msg: '',
+    msg: 'PORCARIA',
     name: 'sign1',
     font1: new ig.Font( 'media/04b03.font.png' ),
 /*
@@ -31,5 +31,13 @@ EntitySign = Entity_transparent.extend({
         console.log('colideWithHero() :)');
         ig.hero.last_touched = this;
         // MUST STORE PLAYER POS IN PLAYER, SO I KNOW IF THEY WALKED AWAY:)
+    },
+    act: function() {
+        // for pausing
+ig.system.stopRunLoop();
+
+        console.log(this.msg);
+// for resuming
+setTimeout('ig.system.startRunLoop();', 500);
     }
 });

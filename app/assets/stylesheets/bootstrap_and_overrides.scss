@@ -1,0 +1,48 @@
+@import "bootstrap_overrides/variables";
+@import "bootstrap";
+//body { padding-top: 60px; }
+.btn { border-radius: 0; }
+@import "font-awesome";
+@import "font-awesome-ie7";
+@import "bootstrap-responsive";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// See http://twitter.github.com/bootstrap/less.html
+
+
+
+//form error
+
+.control-group.error2 {
+  background: $errorText;
+  padding: 5px 0;
+  label, span.help-inline { color:#fff; }
+}
+
+
+
+
+// Block level inputs
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}

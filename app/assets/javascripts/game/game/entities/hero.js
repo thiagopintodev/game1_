@@ -10,47 +10,8 @@ EntityHero = ig.Entity.extend({
     still_touches: function() {
         if (this.last_touched == null)
             return false;
-
-//            console.log(Math.abs(this.last_touched.pos.x + this.last_touched.size.x)+' obj');
-//            console.log(Math.abs(this.pos.x + this.size.x)+' hero');
-
-/*
-        x_dist = Math.abs(this.last_touched.pos.x - this.pos.x);
-        y_dist = Math.abs(this.last_touched.pos.y - this.pos.y);
-
-        //console.log("dist_y: "+ y_dist)
-
-        touches_x = [this.last_touched.size.x, this.size.x].indexOf(x_dist) >= 0;
-        touches_y = [this.last_touched.size.y, this.size.y].indexOf(y_dist) >= 0;
-
-        //console.log("touches x: " + touches_x)
-        //console.log("touches y: " + touches_y)
-
-        if (touches_x) {
-            med = (this.last_touched.size.y + this.size.y)/2;
-            console.log("X, dist y: "+y_dist+" med: " +med)
-        }
-        if (touches_y) {
-            med = (this.last_touched.size.x + this.size.x)/2;
-            console.log("Y, dist x: "+x_dist+" med: " +med)
-        }
-*/
-
-
-        //console.log(+' pos dist');
-        //console.log(Math.abs(this.last_touched.size.y - this.size.y)+' size dist');
-        //console.log(Math.abs(this.pos.x + this.size.x)+' hero');
-
-
-        //console.log(Math.abs(this.last_touched.pos.y - this.pos.y)+' y')
-        //if (this.touches(this.last_touched))
-        //return (touches_x || touches_y) && !(touches_x || touches_y); //XOR
-        return false;
-
-        // MUST CHECK IF hero POS IS THE SAME
-
-        //this.last_touched = null;
-        //return false;
+        console.log(this.distanceTo( this.last_touched ) )
+        return this.distanceTo( this.last_touched ) <= 20;
     },
 
     speed_const: 70,
@@ -119,8 +80,8 @@ EntityHero = ig.Entity.extend({
                 this.walk('right', false);
             }
             else if( ig.input.state('learn')) {
-                console.log('x: '+this.hero.pos.x+' y: '+this.hero.pos.y);
-                console.log('still touching last: '+this.hero.still_touches());
+                if (this.hero.still_touches())
+                    this.hero.last_touched.act();
             }
             else
             {
