@@ -43,5 +43,16 @@ function definePositions() {
 
 
 function loadImpact() {
-    ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
+    //ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
+
+    $('#myTab a[href="#tab-chat"]').tab('show');
+
+    $('#myTab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#canvas').click(function() {
+      $('#text').blur();
+    });
 }

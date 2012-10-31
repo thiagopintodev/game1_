@@ -11,11 +11,118 @@
 
 
 
+// https://github.com/ckrack/fbootstrapp/blob/master/lib/patterns.less#L319
+// TABS AND PILLS
+// --------------
+
+// Common styles
+.nav-tabs,
+.pills {
+  margin: 0 0 $baseline;
+  padding: 0;
+  > li {
+    float: left;
+    > a {
+      display: block;
+    }
+  }
+}
+
+// Tabs
+.nav-tabs {
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0 0 1px;
+  > li {
+    position: relative; // For the dropdowns mostly
+    margin-bottom: -1px;
+    > a {
+      padding: 0 15px;
+      margin-right: 2px;
+      line-height: ($baseline * 1.5);
+      border: 1px solid transparent;
+      border-radius: 0;
+      &:hover {
+        text-decoration: none;
+        background-color: #eee;
+        border-color: #eee #eee #ddd;
+      }
+    }
+  }
+  // Active state, and it's :hover to override normal :hover
+  .active > a,
+  .active > a:hover {
+    color: $gray;
+    background-color: $white;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+  }
+}
+
+// Dropdowns in tabs
+.nav-tabs {
+  // first one for backwards compatibility
+  .menu-dropdown,
+  .dropdown-menu {
+    top: 25px;
+    border-width: 1px;
+    border-radius: 0 4px 4px 4px;
+  }
+  // first one for backwards compatibility
+  a.menu:after,
+  .dropdown-toggle:after {
+    border-top-color: $blueDark;
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+  // first one for backwards compatibility
+  li.open.menu .menu,
+  .open.dropdown .dropdown-toggle {
+    border-color: $blueDark;
+  }
+  // first one for backwards compatibility
+  li.open a.menu:after,
+  .dropdown.open .dropdown-toggle:after {
+    border-top-color: $blue;
+  }
+}
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+//custom
+
+
+.tab-pane {
+  margin: 0 0px;
+}
+
+#panel .nav-tabs {
+  margin-bottom: 0;
+}
+
+#chat {
+.line { padding: 0 ;
+  position:relative;
+  small { margin-right: 25px;display:block; }
+  .btn-mini { position:absolute;right:0;top:0; }
+
+}
+  .line:nth-child(odd) { background: #eee; }
+  * { font-size:small !important; }
+  .friend strong { color:$blueDark }
+}
 
 
 
