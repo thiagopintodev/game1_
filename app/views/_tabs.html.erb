@@ -1,0 +1,104 @@
+
+<ul class="nav nav-tabs" id="myTab">
+  <li><a href="#tab-chat" title="Chat"><%= icon('comments') %> Chat</a></li>
+  <li><a href="#tab-home"  title="My Account"><%= icon('home') %> My Account</a></li>
+</ul>
+ 
+<div class="tab-content">
+  <div class="tab-pane" id="tab-chat">
+
+
+<% users = [
+            {
+              id:         '1307529248',
+              name:       'John',
+              is_friend:  rand(10).odd?
+            },
+            {
+              id:         '123456',
+              name:       'Ash',
+              is_friend:  rand(10).odd?
+            },
+            {
+              id:         'barbie',
+              name:       'Mist',
+              is_friend:  rand(10).odd?
+            },
+            {
+              id:         'albert',
+              name:       'ProfOak',
+              is_friend:  rand(10).odd?
+            },
+            {
+              id:         'evandrodep',
+              name:       'Gary',
+              is_friend:  rand(10).odd?
+            }
+            ] %>
+          <a hret="#" class="btn btn-mini btn-block" id="btn-history"><%= icon_text('time', "history") %></a>
+          <div id="chat">
+            <% 8.times do |i| %>
+              <% user = users.sample %>
+
+
+            <div class="line <%= 'friend' if user[:is_friend] %>">
+              <small>
+                <img src="https://graph.facebook.com/<%= user[:id] %>/picture?type=square" width="24" height="24" />
+                <strong>@<%= user[:name] %>:</strong>
+                <%= (rand(10) > 4) ? cycle('lol', ':)', 'kkk') : Faker::Lorem.words(rand(18)+3).join(' ') %>
+              </small>
+
+      <a href="#" class="btn btn-mini pull-right" data-loading-text="Loading...">
+      <i class="icon-circle-arrow-right"></i>
+      </a>  
+            </div>
+
+
+            <% end %>
+          </div>
+
+
+  </div>
+  <div class="tab-pane" id="tab-home">
+
+      <p>
+      <button type="button" class="btn btn-success" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-info" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-warning" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-inverse" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-link" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-primary" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-danger" data-loading-text="Loading...">Loading state</button>
+      </p>
+
+      <a href="#" class="btn pull-right" data-loading-text="Loading...">
+      <i class="icon-circle-arrow-right"></i>
+      </a>  
+
+
+      <p>
+      <button type="button" class="btn btn-link" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-primary" data-loading-text="Loading...">Loading state</button>
+      </p>
+      <p>
+      <button type="button" class="btn btn-danger" data-loading-text="Loading...">Loading state</button>
+      </p>
+      
+  </div>
+</div>
+
+
