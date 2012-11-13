@@ -1,0 +1,10 @@
+defaults: &defaults
+  a: false
+
+production:
+  <<: *defaults
+  domain: <%= server_name %>
+  facebook:
+    key: a
+    secret: b
+    options: {scope: 'email'}
