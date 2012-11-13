@@ -61,7 +61,7 @@ namespace :deploy do
       #
       #if File.exist?(assets_version_touch_filename)
       if remote_file_exists?(assets_version_touch_filename)
-        puts "Assets seem to be precompiled already. config/mindsmesh.cap.yml : #{my_cap_setings['assets_version']}"
+        puts "Assets seem to be precompiled already: #{assets_version}"
       else
         run <<-CMD
           cd #{latest_release} &&
