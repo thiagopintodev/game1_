@@ -27,17 +27,24 @@
 
 <div id="wrapper-out">
 <div id="wrapper">
+  <div id="split">
+    <canvas id="canvas">
+    </canvas>
+  </div>
+  
+<% if false %>
 
   <div id="split">
     <div id="panel">
       <%= render '/tabs' %>
     </div>
+
     <canvas id="canvas">
     </canvas>
   </div>
 
   <%= render '/navbar' %>
-
+<% end %>
 </div>
 </div>
 

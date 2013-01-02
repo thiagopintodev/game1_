@@ -10,24 +10,24 @@ function definePositions() {
   
   sizes.split = {
     w: parseInt($("#split").css("width").replace('px','')) / 2,
-    h: parseInt($("#split").css("height").replace('px',''))
+    h: parseInt($("#split").css("height").replace('px',''))/ 2,
   }
 
 
   
 
-  $("#canvas").css({
-    top:  0,
-    left:   sizes.split.w,
-    width:  sizes.split.w,
-    height: sizes.split.h,
-    });
-  $("#panel").css({
-    top:  0,
-    left:   0,
-    width:  sizes.split.w,
-    height: sizes.split.h,
-    });
+  // $("#canvas").css({
+  //   top:  0,
+  //   left:   sizes.split.w,
+  //   width:  sizes.split.w,
+  //   height: sizes.split.h,
+  //   });
+  // $("#panel").css({
+  //   top:  0,
+  //   left:   0,
+  //   width:  sizes.split.w,
+  //   height: sizes.split.h,
+  //   });
 
 
   /*
@@ -43,16 +43,17 @@ function definePositions() {
 
 
 function loadImpact() {
-    ig.main( '#canvas', g1.Game, 60, sizes.split.w/2, sizes.split.h/2, 2 );
+    //ig.main( '#canvas', g1.Game, 60, sizes.split.w/2, sizes.split.h/2, 2 );
+    ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
 
-    $('#myTab a[href="#tab-chat"]').tab('show');
+    // $('#myTab a[href="#tab-chat"]').tab('show');
 
-    $('#myTab a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
+    // $('#myTab a').click(function (e) {
+    //   e.preventDefault();
+    //   $(this).tab('show');
+    // });
 
-    $('#canvas').click(function() {
-      $('#text').blur();
-    });
+    // $('#canvas').click(function() {
+    //   $('#text').blur();
+    // });
 }
