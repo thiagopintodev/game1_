@@ -1,3 +1,5 @@
+sizes = {};
+
 $(function() {
   definePositions();
   loadImpact()
@@ -6,7 +8,6 @@ $(function() {
 
 function definePositions() {
 
-  sizes = {};
   
   sizes.split = {
     w: parseInt($("#split").css("width").replace('px','')) / 2,
