@@ -10,8 +10,8 @@ function definePositions() {
 
   
   sizes.split = {
-    w: parseInt($("#split").css("width").replace('px','')) / 2,
-    h: parseInt($("#split").css("height").replace('px',''))/ 2,
+    w: parseInt($("#split").css("width").replace('px','')),
+    h: parseInt($("#split").css("height").replace('px','')),
   }
 
 
@@ -44,8 +44,8 @@ function definePositions() {
 
 
 function loadImpact() {
-    //ig.main( '#canvas', g1.Game, 60, sizes.split.w/2, sizes.split.h/2, 2 );
-    ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
+    ig.main( '#canvas', g1.Game, 60, sizes.split.w/2, sizes.split.h/2, 2 );
+    // ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
 
     // $('#myTab a[href="#tab-chat"]').tab('show');
 

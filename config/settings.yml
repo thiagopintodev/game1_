@@ -1,6 +1,6 @@
 defaults: &defaults
   host: 0.0.0.0:3000
-  assets_version: 100
+  assets_version: 10013
 
 development:
   <<: *defaults
