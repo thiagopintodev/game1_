@@ -58,6 +58,6 @@ module Game1
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = YAML.load(File.read("config/settings.yml"))['defaults']['assets_version'].to_s
+    config.assets.version = File.read('assets_version').to_s
   end
 end
