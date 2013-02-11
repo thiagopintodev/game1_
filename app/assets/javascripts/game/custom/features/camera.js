@@ -1,3 +1,20 @@
+FeatureCamera = ig.Class.extend({
+  init: function(entity) {
+    this.entity = entity;
+  },
+  follow: function() {
+    ig.game.screen.x = this.entity.pos.x - ig.system.width/2;
+    ig.game.screen.y = this.entity.pos.y - ig.system.height/2;
+  },
+  draw: function()
+  {
+    console.log('lol')
+  }
+});
+
+
+
+/*
 ig.module (
   'game.features.camera'
 )
@@ -7,10 +24,8 @@ ig.module (
 .defines(function(){
 
   FeatureCamera = ig.Class.extend({
-    /*
-    init: function() {
-    },
-    */
+    // init: function() {
+    // },
     follow: function( entity ) {
       ig.game.screen.x = entity.pos.x - ig.system.width/2;
       ig.game.screen.y = entity.pos.y - ig.system.height/2;
@@ -18,8 +33,6 @@ ig.module (
   });
 
 });
-
-      /*
 
       // doesn't work properly with HEIGHTS and makes the hero dance when close to edges
       var h = ig.hero;

@@ -1,5 +1,20 @@
 sizes = {};
 
+
+
+
+function mlog(s) {
+  if (ig.system.cFrame===1) console.log(s)
+}
+
+function merge(obj1,obj2){
+    var obj3 = {};
+    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    return obj3;
+}
+
+
 $(function() {
   definePositions();
   loadImpact()
@@ -44,8 +59,9 @@ function definePositions() {
 
 
 function loadImpact() {
-    ig.main( '#canvas', g1.Game, 60, sizes.split.w/2, sizes.split.h/2, 2 );
-    // ig.main( '#canvas', g1.Game, 60, sizes.split.w, sizes.split.h, 1 );
+    ig.setNocache( true );
+    ig.main( '#canvas', g1.MyGame, 60, sizes.split.w/2, sizes.split.h/2, 2 );
+    // ig.main( '#canvas', ig.MyGame, 60, sizes.split.w, sizes.split.h, 1 );
 
     // $('#myTab a[href="#tab-chat"]').tab('show');
 

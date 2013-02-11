@@ -18,7 +18,7 @@ ig.module (
       ig.input.bind( ig.KEY.L,  'learn'   );
 
 
-      ig.input.bind( ig.KEY.MOUSE1,   'goto'  );
+      ig.input.bind( ig.KEY.MOUSE1,   'button'  );
 
       //ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
     }

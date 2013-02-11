@@ -108,6 +108,7 @@ EntityHero = ig.Entity.extend({
         }
     },
     
+
     init: function( x, y, settings ) {
         this.parent( x, y, settings );
         ig.hero = this;
@@ -124,6 +125,10 @@ EntityHero = ig.Entity.extend({
 
         this.moving.update();
         this.parent();
+        //this.camera.follow();
+
+        ig.game.screen.x = this.pos.x - ig.system.width/2;
+        ig.game.screen.y = this.pos.y - ig.system.height/2;
 
     },
     draw: function() {
