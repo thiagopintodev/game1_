@@ -116,7 +116,7 @@ g1.MyGame = ig.Game.extend({
 
 
 
-    mlog(ig.input.state('left')+', '+ig.input.pressed('left'))
+    //mlog(ig.input.state('left')+', '+ig.input.pressed('left'))
 
     // ig.system.context.fillStyle = 'green';
     // ig.system.context.fillRect(65, 0, 65, 65);
