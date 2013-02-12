@@ -5,7 +5,10 @@ g1.ArrowButtons = ig.Entity.extend({
   image: new ig.Image( 'media/key_arrows.gif' ),
 
   buttons: [
-    {direction: 'up'}
+    {direction: 'up',    x1: 48, x2: 96,  y1: 00, y2: 48, color: 'red'},
+    {direction: 'left',  x1: 00, x2: 48,  y1: 48, y2: 96, color: 'blue'},
+    {direction: 'down',  x1: 48, x2: 96,  y1: 48, y2: 96, color: 'white'},
+    {direction: 'right', x1: 96, x2: 144, y1: 48, y2: 96, color: 'green'}
   ],
 
   init: function() {
@@ -15,10 +18,14 @@ g1.ArrowButtons = ig.Entity.extend({
   update: function() {
     this.parent();
 
-    if( ig.input.state('button') && this._isMouseOver()) {
+    if( ig.input.state('cursor')) {
       //this.walk('up', false);
       //mlog(ig.input.mouse.x)
-      ig.hero.moving.walk(this.direction, false);
+      var b = this.getButtonPressed();
+      if (b)
+        ig.hero.moving.walk(b.direction, false);
+      else
+        ig.hero.moving.stop();
     }
     // else
     //   ig.hero.moving.stop();
@@ -27,11 +34,27 @@ g1.ArrowButtons = ig.Entity.extend({
   draw: function() {
     this.parent();
 
-    // ig.system.context.fillStyle = this.color;
-    // ig.system.context.fillRect(this.x1, this.y1, this.width, this.height);
+
+    for( var i = 0; i < this.buttons.length; i++ ) {
+      var b = this.buttons[i];
+    ig.system.context.fillStyle = b.color;
+      ig.system.context.fillRect(b.x1, b.y1, 48, 48);
+    }
   },
 
 
+  getButtonPressed: function() {
+    var x = ig.input.mouse.x * ig.system.scale,
+        y = ig.input.mouse.y * ig.system.scale;
+
+    // mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
+
+    for( var i = 0; i < this.buttons.length; i++ ) {
+      var b = this.buttons[i];
+      if (b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b;
+    }
+    return false;
+  }
 
 
 
@@ -59,16 +82,6 @@ g1.ArrowButtons = ig.Entity.extend({
   //   this.y2 = this.y1 + height;
   // },
 
-  _isMouseOver: function() {
-    return false;
-    // var x = ig.input.mouse.x * ig.system.scale,
-    //     y = ig.input.mouse.y * ig.system.scale;
-
-    // mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
-
-    // return  this.x1 < x && x < this.x2 &&
-    //         this.y1 < y && y < this.y2;
-  }
 
 
 

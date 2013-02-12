@@ -52,27 +52,24 @@ g1.MyGame = ig.Game.extend({
 		//ig.game.loadLevelDeferred(ig.global['LevelA']);
 		ig.game.loadLevel(ig.global['LevelA']);
 
-		//this.createLayer()
 
 
-    // For Desktop Browsers
-    ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
-    ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
+    // // For Mobile Browsers and Ejecta
+    // // if( ig.ua.mobile ) {
+    // if( true ) {
+    // 	var x = 40 * ig.system.scale;
+    // 	var y = 48 * ig.system.scale;
+    //   var ypos1 = ig.system.height - y*2;
+    //   var ypos2 = ig.system.height - y;
+    //   this.buttons = [
+    //       new ig.TouchButton( 'left',  0, ypos2, x, y, this.buttonImage, 0 ),
+    //       new ig.TouchButton( 'right', x, ypos2, x, y, this.buttonImage, 1 )
+    //   ];
 
-
-
-    // For Mobile Browsers and Ejecta
-    // if( ig.ua.mobile ) {
-        var ypos = ig.system.height - 48;
-        this.buttons = [
-            new ig.TouchButton( 'left', 0, ypos, 40, 48, this.buttonImage, 0 ),
-            new ig.TouchButton( 'right', 50, ypos, 40, 48, this.buttonImage, 1 )
-        ];
-
-    //ig.system.context.fillRect(40, 0, 65, 65);
+    // //ig.system.context.fillRect(40, 0, 65, 65);
     // }
 
-		// this.addItem(new g1.ArrowButtons());
+		this.addItem(new g1.ArrowButtons());
 
 		// ig.game.spawnEntity(EntityHero);
 		//ig.game.spawnEntity(FeatureButton, 100, 50, {right: 99, bottom: 0});

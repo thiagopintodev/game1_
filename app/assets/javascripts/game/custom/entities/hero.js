@@ -39,54 +39,55 @@ EntityHero = ig.Entity.extend({
         },
         update: function() {
 
-            if( ig.input.state('goto')) {
+            // if( ig.input.state('cursor')) {
 
-                //works with absolute screen position
-                //var dist_x = ig.system.width/2 - ig.input.mouse.x;
-                //var dist_y = ig.system.height/2 - ig.input.mouse.y;
+            //     //works with absolute screen position
+            //     //var dist_x = ig.system.width/2 - ig.input.mouse.x;
+            //     //var dist_y = ig.system.height/2 - ig.input.mouse.y;
 
-                //works with relative hero/map position
-                var hero    = this.hero.pos,
-                    map     = ig.game.screen, //must be a more elgant way to get the current map
-                    mouse   = ig.input.mouse;
+            //     //works with relative hero/map position
+            //     var hero    = this.hero.pos,
+            //         map     = ig.game.screen, //must be a more elgant way to get the current map
+            //         mouse   = ig.input.mouse;
 
-                var dist_x = hero.x - map.x - ig.input.mouse.x,
-                    dist_y = hero.y - map.y - ig.input.mouse.y;
+            //     var dist_x = hero.x - map.x - ig.input.mouse.x,
+            //         dist_y = hero.y - map.y - ig.input.mouse.y;
 
 
-                var face, running;
+            //     var face, running;
 
-                if (Math.abs(dist_x) > Math.abs(dist_y)) {
-                    running = (Math.abs(dist_x) > 100);
-                    face = (dist_x < 0) ? 'right' : 'left';
-                }
-                else
-                {
-                    running = (Math.abs(dist_y) > 70);
-                    face = (dist_y < 0) ? 'down' : 'up';
-                }
-                this.walk(face, running);
-            }
-            else if( ig.input.state('up')) {
-                this.walk('up', false);
-            }
-            else if( ig.input.state('down')) {
-                this.walk('down', false);
-            }
-            else if( ig.input.state('left')) {
-                this.walk('left', false);
-            }
-            else if( ig.input.state('right')) {
-                this.walk('right', false);
-            }
-            else if( ig.input.state('learn')) {
-                if (this.hero.still_touches())
-                    this.hero.last_touched.act();
-            }
-            else
-            {
-                this.stop();
-            }
+            //     if (Math.abs(dist_x) > Math.abs(dist_y)) {
+            //         running = (Math.abs(dist_x) > 100);
+            //         face = (dist_x < 0) ? 'right' : 'left';
+            //     }
+            //     else
+            //     {
+            //         running = (Math.abs(dist_y) > 70);
+            //         face = (dist_y < 0) ? 'down' : 'up';
+            //     }
+            //     this.walk(face, running);
+            // }
+            // else
+            // if( ig.input.state('up')) {
+            //     this.walk('up', false);
+            // }
+            // else if( ig.input.state('down')) {
+            //     this.walk('down', false);
+            // }
+            // else if( ig.input.state('left')) {
+            //     this.walk('left', false);
+            // }
+            // else if( ig.input.state('right')) {
+            //     this.walk('right', false);
+            // }
+            // else if( ig.input.state('learn')) {
+            //     if (this.hero.still_touches())
+            //         this.hero.last_touched.act();
+            // }
+            // else
+            // {
+            //     //this.stop();
+            // }
 
         },
         //configures walk for a tile
@@ -98,6 +99,7 @@ EntityHero = ig.Entity.extend({
             this.hero.vel.x       = spd * this.anims[face].x;
             this.hero.vel.y       = spd * this.anims[face].y;
             this.hero.currentAnim = this.hero.anims[ ":state_:face".replace(':state', state).replace(':face', face) ];
+            console.log(this.hero.vel)
         },
         stop: function() {
             this.hero.vel.x = 0;
@@ -127,6 +129,7 @@ EntityHero = ig.Entity.extend({
         this.parent();
         //this.camera.follow();
 
+        //set camera in half of screen
         ig.game.screen.x = this.pos.x - ig.system.width/2;
         ig.game.screen.y = this.pos.y - ig.system.height/2;
 
