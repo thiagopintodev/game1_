@@ -2,7 +2,6 @@ g1.ArrowButtons = ig.Entity.extend({
 
   _layer: 'gui',
 
-  image: new ig.Image( 'media/arrow_down.png' ),
   anim: new ig.Animation(
           new ig.AnimationSheet( 'media/arrow_down_32.png', 32, 32),
           0.1, [0]
