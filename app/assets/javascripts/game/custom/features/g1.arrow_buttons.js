@@ -2,33 +2,74 @@ g1.ArrowButtons = ig.Entity.extend({
 
   _layer: 'gui',
 
-  image: new ig.Image( 'media/key_arrows.gif' ),
+  image: new ig.Image( 'media/arrow_down.png' ),
+  anim: new ig.Animation(
+          new ig.AnimationSheet( 'media/arrow_down_32.png', 32, 32),
+          0.1, [0]
+        ),
 
   buttons: [
-    {direction: 'up',    x1: 48, x2: 96,  y1: 00, y2: 48, color: 'red'},
-    {direction: 'left',  x1: 00, x2: 48,  y1: 48, y2: 96, color: 'blue'},
-    {direction: 'down',  x1: 48, x2: 96,  y1: 48, y2: 96, color: 'white'},
-    {direction: 'right', x1: 96, x2: 144, y1: 48, y2: 96, color: 'green'}
+    {key: 'up',    x1: 32, y1: 00, x2: 64,  y2: 32, angle: Math.PI},
+    {key: 'left',  x1: 00, y1: 32, x2: 32,  y2: 64, angle: Math.PI / 2},
+    {key: 'down',  x1: 32, y1: 32, x2: 64,  y2: 64, angle: 0},
+    {key: 'right', x1: 64, y1: 32, x2: 96,  y2: 64, angle: -Math.PI / 2}
   ],
 
   init: function() {
     this.parent();
+
+    ig.input.bind( ig.KEY.A, 'left' );
+    ig.input.bind( ig.KEY.D, 'right');
+    ig.input.bind( ig.KEY.W, 'up'   );
+    ig.input.bind( ig.KEY.S, 'down' );
+
+    ig.input.bind( ig.KEY.LEFT_ARROW,   'left'  );
+    ig.input.bind( ig.KEY.RIGHT_ARROW,  'right' );
+    ig.input.bind( ig.KEY.UP_ARROW,     'up'    );
+    ig.input.bind( ig.KEY.DOWN_ARROW,   'down'  );
+
+
+    ig.input.bind( ig.KEY.MOUSE1,   'cursor'  );
+
+    ig.input.bind( ig.KEY.L,  'learn'   );
+
+    //ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
+
+    for( var i = 0; i < this.buttons.length; i++ ) {
+      var b = this.buttons[i];
+      // b.x1 = ig.system.width  - b.x1;
+      // b.x2 = ig.system.width  - b.x2;
+      b.y1 += ig.system.height - 64;
+      b.y2 += ig.system.height - 64;
+    }
+
   },
   
   update: function() {
     this.parent();
 
-    if( ig.input.state('cursor')) {
-      //this.walk('up', false);
-      //mlog(ig.input.mouse.x)
-      var b = this.getButtonPressed();
-      if (b)
-        ig.hero.moving.walk(b.direction, false);
-      else
-        ig.hero.moving.stop();
-    }
-    // else
-    //   ig.hero.moving.stop();
+    // if( ig.input.state('up')) {
+    //   key = 'up';
+    // }
+    // else if( ig.input.state('down')) {
+    //   key = 'down';
+    // }
+    // else if( ig.input.state('left')) {
+    //   key = 'left';
+    // }
+    // else if( ig.input.state('right')) {
+    //   key = 'right';
+    // }
+    // else if( ig.input.state('cursor')) {
+    //   key = this.getButtonPressed();
+    // }
+
+    var key = this.getButtonPressed();
+
+    if (key)
+      ig.hero.moving.walk(key, false);
+    else
+      ig.hero.moving.stop();
   },
   
   draw: function() {
@@ -37,24 +78,39 @@ g1.ArrowButtons = ig.Entity.extend({
 
     for( var i = 0; i < this.buttons.length; i++ ) {
       var b = this.buttons[i];
-    ig.system.context.fillStyle = b.color;
-      ig.system.context.fillRect(b.x1, b.y1, 48, 48);
+      this.anim.angle = b.angle;
+      // mlog(b.pivot);
+      this.anim.draw( b.x1, b.y1 );
     }
   },
 
 
   getButtonPressed: function() {
-    var x = ig.input.mouse.x * ig.system.scale,
-        y = ig.input.mouse.y * ig.system.scale;
+    var x = ig.input.mouse.x,
+        y = ig.input.mouse.y;
 
-    // mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
+    //mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
 
     for( var i = 0; i < this.buttons.length; i++ ) {
       var b = this.buttons[i];
-      if (b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b;
+      if (ig.input.state('cursor') && b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b.key;
+      if (ig.input.state(b.key)) return b.key;
     }
-    return false;
+    return null;
   }
+
+  // getButtonPressed: function() {
+  //   var x = ig.input.mouse.x,
+  //       y = ig.input.mouse.y;
+
+  //   //mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
+
+  //   for( var i = 0; i < this.buttons.length; i++ ) {
+  //     var b = this.buttons[i];
+  //     if (b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b;
+  //   }
+  //   return null;
+  // }
 
 
 

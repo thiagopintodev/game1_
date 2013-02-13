@@ -38,9 +38,6 @@ g1.MyGame = ig.Game.extend({
 		this.createLayer('gui');
 	},
 
-    buttons: [],
-    buttonImage: new ig.Image( 'media/iphone-buttons.png' ),
-
 	init: function() {
 		this.initializeLayers();
 		// Initialize your game here; bind keys etc.
@@ -68,8 +65,8 @@ g1.MyGame = ig.Game.extend({
 
     // //ig.system.context.fillRect(40, 0, 65, 65);
     // }
-
-		this.addItem(new g1.ArrowButtons());
+    g1.keypad = new g1.ArrowButtons();
+		this.addItem(g1.keypad);
 
 		// ig.game.spawnEntity(EntityHero);
 		//ig.game.spawnEntity(FeatureButton, 100, 50, {right: 99, bottom: 0});
@@ -114,18 +111,5 @@ g1.MyGame = ig.Game.extend({
 
 
     //mlog(ig.input.state('left')+', '+ig.input.pressed('left'))
-
-    // ig.system.context.fillStyle = 'green';
-    // ig.system.context.fillRect(65, 0, 65, 65);
-    // ig.system.context.fillStyle = 'red';
-    // ig.system.context.fillRect(65, 65, 65, 65);
-    // ig.system.context.fillStyle = 'blue';
-    // ig.system.context.fillRect(0, 65, 65, 65);
-    // ig.system.context.fillRect(130, 65, 65, 65);
-
-    // Draw all touch buttons - if we have any
-    for( var i = 0; i < this.buttons.length; i++ ) {
-      this.buttons[i].draw();
-    }
 	}
 });
