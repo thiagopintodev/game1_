@@ -99,7 +99,6 @@ EntityHero = ig.Entity.extend({
             this.hero.vel.x       = spd * this.anims[face].x;
             this.hero.vel.y       = spd * this.anims[face].y;
             this.hero.currentAnim = this.hero.anims[ ":state_:face".replace(':state', state).replace(':face', face) ];
-            console.log(this.hero.vel)
         },
         stop: function() {
             this.hero.vel.x = 0;

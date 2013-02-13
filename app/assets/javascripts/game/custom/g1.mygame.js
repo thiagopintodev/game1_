@@ -86,8 +86,8 @@ g1.MyGame = ig.Game.extend({
 		this.parent();
 
 
-		if (ig.system.cFrame == undefined || ig.system.cFrame == 0 || ig.system.cFrame == ig.system.fps) ig.system.cFrame = 0;
-		ig.system.cFrame++;
+		if (g1.cFrame == undefined || g1.cFrame == 0 || g1.cFrame == ig.system.fps) g1.cFrame = 0;
+		g1.cFrame++;
 
 		// if (ig.input.state('left')) {
 		// 	console.log('left')

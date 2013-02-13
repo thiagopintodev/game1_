@@ -2,20 +2,24 @@ g1.ArrowButtons = ig.Entity.extend({
 
   _layer: 'gui',
 
+  btn_size: 32,
+
   anim: new ig.Animation(
           new ig.AnimationSheet( 'media/arrow_down_32.png', 32, 32),
           0.1, [0]
         ),
 
   buttons: [
-    {key: 'up',    x1: 32, y1: 00, x2: 64,  y2: 32, angle: Math.PI},
-    {key: 'left',  x1: 00, y1: 32, x2: 32,  y2: 64, angle: Math.PI / 2},
-    {key: 'down',  x1: 32, y1: 32, x2: 64,  y2: 64, angle: 0},
-    {key: 'right', x1: 64, y1: 32, x2: 96,  y2: 64, angle: -Math.PI / 2}
+    {action: 'up',    x1: 1, y1: 0, x2: 2, y2: 1, angle: 1},
+    {action: 'left',  x1: 0, y1: 1, x2: 1, y2: 2, angle: 1/2},
+    {action: 'down',  x1: 1, y1: 1, x2: 2, y2: 2, angle: 0},
+    {action: 'right', x1: 2, y1: 1, x2: 3, y2: 2, angle: -1/2}
   ],
 
   init: function() {
     this.parent();
+
+    setInterval(this.interval, 1000, this);
 
     ig.input.bind( ig.KEY.A, 'left' );
     ig.input.bind( ig.KEY.D, 'right');
@@ -34,12 +38,19 @@ g1.ArrowButtons = ig.Entity.extend({
 
     //ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
 
+    var variables = ['x1', 'x2', 'y1', 'y2'];
     for( var i = 0; i < this.buttons.length; i++ ) {
       var b = this.buttons[i];
-      // b.x1 = ig.system.width  - b.x1;
-      // b.x2 = ig.system.width  - b.x2;
-      b.y1 += ig.system.height - 64;
-      b.y2 += ig.system.height - 64;
+      for( var j = 0; j < variables.length; j++ ) {
+        var v = variables[j];
+        b[v] = b[v] * this.btn_size;
+      }
+      b.angle = b.angle * Math.PI;
+        
+      // b.x1 = ig.system.width - this.btn_size * ig.system.scale;
+      // b.x2 = ig.system.width - this.btn_size * ig.system.scale;
+      b.y1 += ig.system.height - this.btn_size * ig.system.scale;
+      b.y2 += ig.system.height - this.btn_size * ig.system.scale;
     }
 
   },
@@ -47,42 +58,35 @@ g1.ArrowButtons = ig.Entity.extend({
   update: function() {
     this.parent();
 
-    // if( ig.input.state('up')) {
-    //   key = 'up';
-    // }
-    // else if( ig.input.state('down')) {
-    //   key = 'down';
-    // }
-    // else if( ig.input.state('left')) {
-    //   key = 'left';
-    // }
-    // else if( ig.input.state('right')) {
-    //   key = 'right';
-    // }
-    // else if( ig.input.state('cursor')) {
-    //   key = this.getButtonPressed();
-    // }
+    this.action = this.getButtonPressed();
 
-    var key = this.getButtonPressed();
-
-    if (key)
-      ig.hero.moving.walk(key, false);
-    else
+    if (this.action)
+      ig.hero.moving.walk(this.action, this.b_running);
+    else {
+      this.last_action = null;
+      this.b_running = false;
       ig.hero.moving.stop();
+    }
   },
   
   draw: function() {
     this.parent();
 
-
     for( var i = 0; i < this.buttons.length; i++ ) {
       var b = this.buttons[i];
       this.anim.angle = b.angle;
-      // mlog(b.pivot);
       this.anim.draw( b.x1, b.y1 );
     }
   },
 
+  //init functions
+
+  interval: function(context) {
+    context.last_action = context.action;
+    context.b_running = (context.action == context.last_action);
+  },
+
+  // update functions
 
   getButtonPressed: function() {
     var x = ig.input.mouse.x,
@@ -92,111 +96,10 @@ g1.ArrowButtons = ig.Entity.extend({
 
     for( var i = 0; i < this.buttons.length; i++ ) {
       var b = this.buttons[i];
-      if (ig.input.state('cursor') && b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b.key;
-      if (ig.input.state(b.key)) return b.key;
+      if (ig.input.state('cursor') && b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b.action;
+      if (ig.input.state(b.action)) return b.action;
     }
     return null;
   }
 
-  // getButtonPressed: function() {
-  //   var x = ig.input.mouse.x,
-  //       y = ig.input.mouse.y;
-
-  //   //mlog(this.x1+' < '+x+' && '+x +'<'+ this.x2 + ' : '+ this.y1+' < '+y+' && '+y +'<'+ this.y2);
-
-  //   for( var i = 0; i < this.buttons.length; i++ ) {
-  //     var b = this.buttons[i];
-  //     if (b.x1 < x && x < b.x2 && b.y1 < y && y < b.y2) return b;
-  //   }
-  //   return null;
-  // }
-
-
-
-
-  //private methods
-
-  // _initSettings: function(color, direction, width, height, settings) {
-  //   //
-  //   this.color = color;
-  //   this.direction = direction;
-  //   //size
-  //   this.width  = width;
-  //   this.height = height;
-  //   //pos
-  //   if (settings.right == undefined)
-  //     this.x1 = settings.left;
-  //   else
-  //     this.x1 = ig.system.realWidth  - width - settings.right;
-  //   if (settings.bottom == undefined)
-  //     this.y1 = settings.top;
-  //   else
-  //     this.y1 = ig.system.realHeight  - height - settings.bottom;
-  //   //area
-  //   this.x2 = this.x1 + width;
-  //   this.y2 = this.y1 + height;
-  // },
-
-
-
-
 });
-
-
-
-/*
-FeatureButton = ig.Entity.extend({  
-  // action: 'undefined',
-  // image: null,
-  // tile: 0,
-  // pos: {x: 0, y: 0},
-  // size: {x: 0, y: 0},
-  // area: {x1: 0, y1:0, x2: 0, y2:0},
-
-  // pressed: false, 
-  // touchId: 0,
-  
-  //init: function( action, x, y, width, height, image, tile ) {
-  init: function() {
-    // var internalWidth = parseInt(ig.system.canvas.offsetWidth) || ig.system.realWidth;
-    // var s = ig.system.scale * (internalWidth / ig.system.realWidth);
-    
-    // this.action = action;
-    // this.pos = {x: x, y: y};
-    // this.size = {x: width, y: height};
-    // this.area = {x1: x * s, y1: y * s, x2: (x + width) * s, y2: (y + height) *s};
-    
-    // this.image = image || null;
-    // this.tile = tile || 0;
-    this.parent();
-
-    if( ig.input.state('goto')) {
-      //this.walk('up', false);
-      console.log('walk')
-    }
-
-    this.w = 100;
-    this.h = 50;
-    
-    this.r = 0;
-    this.b = 0;
-
-    this.l = ig.system.realWidth  - this.w - this.r;
-    this.t = ig.system.realHeight - this.h - this.b;
-    console.log('init')
-  },
-  
-  
-  draw: function() {
-    console.log('draw');
-    this.parent();
-    // if( this.image ) { 
-    //   this.image.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
-    // }
-
-
-    ig.system.context.fillStyle = 'red';
-    ig.system.context.fillRect(this.l, this.t, this.w, this.h);
-  }
-});
-*/
