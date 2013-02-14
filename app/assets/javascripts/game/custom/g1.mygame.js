@@ -41,8 +41,6 @@ g1.MyGame = ig.Game.extend({
 	init: function() {
 		this.initializeLayers();
 		// Initialize your game here; bind keys etc.
-		//new FeatureInputBindings();
-		FeatureInputBindings.bind();
 
 		//this.loadLevel(LevelA);
 		//this.loadLevelDeferred(ig.global['LevelA']);
@@ -65,20 +63,9 @@ g1.MyGame = ig.Game.extend({
 
     // //ig.system.context.fillRect(40, 0, 65, 65);
     // }
-    g1.keypad = new g1.ArrowButtons();
-		this.addItem(g1.keypad);
 
-		// ig.game.spawnEntity(EntityHero);
-		//ig.game.spawnEntity(FeatureButton, 100, 50, {right: 99, bottom: 0});
-		// ig.game.spawnEntity(FeatureButton, {});
-		// this.addItem( new FeatureButton('red', 'left', 		100, 50, {left: 0, 		bottom: 0}) 	);
-		// this.addItem( new FeatureButton('green', 'up', 		100, 50, {left: 100, 	bottom: 50}) 	);
-		// this.addItem( new FeatureButton('yellow', 'down', 100, 50, {left: 100, 	bottom: 0}) 	);
-		// this.addItem( new FeatureButton('red', 'right', 	100, 50, {left: 200, 	bottom: 0}) 	);
 
-		//this.btn = new FeatureButton({with: 100, height: 50, right: 99, bottom: 0});
-
-		
+    this.addItem(g1.keypad = new g1.Keypad());
 	},
 	
 	update: function() {
@@ -108,7 +95,15 @@ g1.MyGame = ig.Game.extend({
     // this.img_arrows.draw(0, 0, [sourceX], [sourceY], [width], [height])
     // this.img_arrows.draw(0, 0);
 
-
+    // var c = ig.system.context;
+    // c.fillStyle = '#ccc';
+    // c.strokeStyle = 'black';
+    // c.shadowBlur=20;
+    // c.shadowColor="black";
+    // c.fillRect(50, 50, 300, 100);
+    // c.strokeRect(50, 50, 300, 100);
+    // c.shadowBlur=0;
+    // ig.game.font1.draw( "this.username", 60, 50, ig.Font.ALIGN.CENTER );
 
     //mlog(ig.input.state('left')+', '+ig.input.pressed('left'))
 	}

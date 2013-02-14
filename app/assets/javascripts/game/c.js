@@ -61,7 +61,16 @@ function definePositions() {
 function loadImpact() {
     ig.setNocache( true );
     ig.main( '#canvas', g1.MyGame, 60, sizes.split.w/2, sizes.split.h/2, 2 );
-    // ig.main( '#canvas', ig.MyGame, 60, sizes.split.w, sizes.split.h, 1 );
+    // ig.main( '#canvas', g1.MyGame, 60, sizes.split.w, sizes.split.h, 1 );
+
+// ig.main(
+//     '#canvas',
+//     YourGame,
+//     60,
+//     window.innerWidth,
+//     window.innerHeight,
+//     1
+// );
 
     // $('#myTab a[href="#tab-chat"]').tab('show');
 
